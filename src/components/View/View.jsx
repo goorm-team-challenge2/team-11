@@ -2,7 +2,9 @@ import cn from 'classnames';
 
 import { Card, Header } from '@/components';
 import ModalFirstPage from '@/components/ModalFirstPage/ModalFirstPage';
-import $participantsInfo from '@/recoil/atoms/participantsInfo';
+import useLocalStorage from '@/hooks/useLocalStorage';
+import $firstPageInfo from '@/recoil/atoms/firstPageInfo';
+import $participantInfos from '@/recoil/atoms/participantInfos';
 import { useRecoilValue } from 'recoil';
 
 import { Typography } from '@goorm-dev/gds-challenge';
@@ -14,17 +16,13 @@ import ModalView from '../ModalView/ModalView';
 import styles from './View.module.scss';
 
 const View = () => {
-	const participantsInfo = useRecoilValue($participantsInfo);
+	const { sessionValue: infos } = useLocalStorage($participantInfos);
 
 	return (
 		<>
 			<Header />
 			<main className={styles.main}>
-				{participantsInfo && participantsInfo.length > 0 ? (
-					<ListView />
-				) : (
-					<EmptyView />
-				)}
+				{infos && infos.length > 0 ? <ListView /> : <EmptyView />}
 			</main>
 			<ModalView />
 		</>

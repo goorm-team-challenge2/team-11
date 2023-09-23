@@ -10,7 +10,6 @@ const useLocalStorage = (recoilState) => {
 		if (item == null) {
 			return;
 		}
-
 		try {
 			setValue(JSON.parse(item));
 		} catch (e) {
@@ -44,3 +43,5 @@ const useLocalStorage = (recoilState) => {
 
 	return { sessionValue, setSessionValue, resetSessionValue };
 };
+
+export default useLocalStorage;

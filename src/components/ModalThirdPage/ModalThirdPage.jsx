@@ -1,3 +1,10 @@
+import { useState } from 'react';
+
+import $modalExpose from '@/recoil/atoms/modalExpose';
+import $modalPage from '@/recoil/atoms/modalPage';
+import $thirdPageInfo from '@/recoil/atoms/thirdPageInfo';
+import { useSetRecoilState } from 'recoil';
+
 import {
 	Button,
 	CarouselIndicators,
@@ -6,11 +13,20 @@ import {
 } from '@goorm-dev/gds-challenge';
 
 const ModalThirdPage = () => {
+	const setModalPage = useSetRecoilState($modalPage);
+	const setModalExpose = useSetRecoilState($modalExpose);
+
+	const [info, setinfo] = useState(null);
+
+	const setThirdPageInfo = useSetRecoilState($thirdPageInfo);
+
 	return (
 		<div>
 			<Modal isOpen>
 				<Modal.Header
-					toggle
+					toggle={() => {
+						setModalExpose(false);
+					}}
 					style={{
 						width: '100%',
 						padding: '16px 24px',
@@ -43,8 +59,12 @@ const ModalThirdPage = () => {
 								alignItems: 'start',
 								width: '100%',
 							}}
+							active={info === 0}
+							onClick={() => {
+								setinfo(info === 0 ? null : 0);
+							}}
 						>
-							1.{' '}
+							1. 정해진 시간 내에 오프라인 팀 챌린지 과제를 수행
 						</Button>
 						<Button
 							color="link"
@@ -53,8 +73,12 @@ const ModalThirdPage = () => {
 								alignItems: 'start',
 								width: '100%',
 							}}
+							active={info === 1}
+							onClick={() => {
+								setinfo(info === 1 ? null : 1);
+							}}
 						>
-							2.{' '}
+							2. 정해진 시간 내에 오프라인 팀 챌린지 과제를 수행
 						</Button>
 						<Button
 							color="link"
@@ -63,8 +87,12 @@ const ModalThirdPage = () => {
 								alignItems: 'start',
 								width: '100%',
 							}}
+							active={info === 2}
+							onClick={() => {
+								setinfo(info === 2 ? null : 2);
+							}}
 						>
-							3.{' '}
+							3. 정해진 시간 내에 오프라인 팀 챌린지 과제를 수행
 						</Button>
 						<Button
 							color="link"
@@ -73,8 +101,12 @@ const ModalThirdPage = () => {
 								alignItems: 'start',
 								width: '100%',
 							}}
+							active={info === 3}
+							onClick={() => {
+								setinfo(info === 3 ? null : 3);
+							}}
 						>
-							4.{' '}
+							4. 정해진 시간 내에 오프라인 팀 챌린지 과제를 수행
 						</Button>
 					</div>
 				</Modal.Body>
@@ -95,8 +127,23 @@ const ModalThirdPage = () => {
 								gap: '8px',
 							}}
 						>
-							<Button color="link">이전</Button>
-							<Button content="end" disabled>
+							<Button
+								color="link"
+								onClick={() => {
+									setModalPage(1);
+								}}
+							>
+								이전
+							</Button>
+							<Button
+								content="end"
+								disabled={info === null}
+								onClick={() => {
+									// 데이터 저장하고 다음 페이지 넘어가기
+									setThirdPageInfo(info);
+									setModalPage(3);
+								}}
+							>
 								다음
 							</Button>
 						</div>
