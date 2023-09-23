@@ -9,6 +9,7 @@ import { Typography } from '@goorm-dev/gds-challenge';
 
 import EmptyView from '../EmptyView/EmptyView';
 import ListView from '../ListView/ListView';
+import ModalView from '../ModalView/ModalView';
 
 import styles from './View.module.scss';
 
@@ -25,7 +26,7 @@ const View = () => {
 					<EmptyView />
 				)}
 			</main>
-			<ModalFirstPage />
+			<ModalView />
 		</>
 	);
 };
